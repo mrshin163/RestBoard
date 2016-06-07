@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd" id="WebApp_ID" version="3.0">
+	
+	<!-- 모든 서블릿이 공통으로 사용하는 서비스 빈파일 등록 -->
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:com/rest/service/service.xml</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	
+	<servlet>
+		<servlet-name>webServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>WEB-INF/pc.xml</param-value>
+		</init-param>
+	</servlet>	
+	
+	<servlet>
+		<servlet-name>deviceServlet</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>WEB-INF/device.xml</param-value>
+		</init-param>
+	</servlet>	
+	
+
+	<!-- 일반 웹브라우저로 접근하는 요청을 처리하는 웹용 서블릿 -->
+	<servlet-mapping>
+		<servlet-name>webServlet</servlet-name>
+		<url-pattern>/pc/*</url-pattern>
+	</servlet-mapping>
+	
+	<!-- 각종 디바이스에서 json 요청을 처리하는 서블릿 -->	
+	<servlet-mapping>
+		<servlet-name>deviceServlet</servlet-name>
+		<url-pattern>/device/*</url-pattern>
+	</servlet-mapping>
+			
+</web-app>
+
+
+
